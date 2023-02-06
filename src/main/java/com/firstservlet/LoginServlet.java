@@ -29,8 +29,9 @@ public class LoginServlet extends HttpServlet {
         String userId = getServletConfig().getInitParameter("username");
         String pass = getServletConfig().getInitParameter("password");
 
-        String nameValidate = "^[A-Z][a-z]{2,}";
-        if (username.equals(userId) && username.matches(nameValidate) && password.equals(pass)) {
+        String nameValidate = "^[A-Z]{1}[a-z]{2,}";
+        String passwordValidate = "^(?=.*[A-z])(?=.*[0-9])([a-zA-Z0-9@._-]).{8,}$";
+        if (username.equals(userId) && username.matches(nameValidate) && password.equals(pass) && password.matches(passwordValidate)) {
             req.setAttribute("username", username);
             req.getRequestDispatcher("loginSuccess.jsp").forward(req, resp);
         } else {
